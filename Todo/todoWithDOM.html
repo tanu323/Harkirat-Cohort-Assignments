@@ -1,0 +1,27 @@
+<html>
+<script>
+    const addTodo = () => {
+        const parent = document.getElementById("MainDiv");
+        const title = document.getElementById("title").value;   //the .value property is used to get the current value of the input field. 
+        const desription = document.getElementById("desription").value
+        const newTodo = document.createElement("div");
+        const titleDiv = document.createElement("div");
+        titleDiv.textContent = title;
+        const descDiv = document.createElement("div");
+        descDiv.textContent = desription;
+        const markCompleted = document.createElement("button");
+        markCompleted.textContent = "Mark as done";
+        markCompleted.addEventListener("click", () => (markCompleted.textContent = "Task Completed"));
+        newTodo.appendChild(titleDiv);
+        newTodo.appendChild(descDiv);
+        newTodo.appendChild(markCompleted);
+        parent.appendChild(newTodo);
+    }
+</script>
+<div id="MainDiv">
+    <input id="title" type="text" placeholder="Todo title" /><br />
+    <input id="desription" type="text" placeholder="Description" /><br />
+    <button onclick="addTodo()">Add new todo</button>
+</div>
+
+</html>
