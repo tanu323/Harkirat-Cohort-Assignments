@@ -35,7 +35,7 @@ const TodoForm = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <label htmlFor="todoTitle">Todo Title:</label>
                 <input
                     type="text"
