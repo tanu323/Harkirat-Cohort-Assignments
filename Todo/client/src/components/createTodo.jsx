@@ -35,6 +35,7 @@ const TodoForm = ({ setShowTodoForm }) => {
     }
 
     return (
+<<<<<<< HEAD
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
@@ -81,6 +82,45 @@ const TodoForm = ({ setShowTodoForm }) => {
                     </div>
                 </form>
             </div>
+=======
+        <div>
+            <form>
+                <label htmlFor="todoTitle">Todo Title:</label>
+                <input
+                    type="text"
+                    id="todoTitle"
+                    name="todoTitle"
+                    value={todoForm.title}
+                    onChange={(e) => setTodoForm({ ...todoForm, title: e.target.value })}
+                />
+
+                <label for="addTask">Todo Title:</label>
+                {todoForm.tasks.map((task, i) => (
+                    <input
+                        key={i}
+                        type="text"
+                        name="addTask"
+                        value={task}
+                        onChange={(event) => handleTaskContentChange(event, i)} />
+                ))}
+
+                {/* Button to add tasks in a todo */}
+                <Mybutton buttonText="Add Tasks" onClickHandler={addingTasks} buttonWidth={10} buttonHeight={10} />
+
+                {/* Button to submit the todo */}
+                <Mybutton
+                    buttonText="Submit"
+                    onClickHandler={handleSubmit}
+                    buttonWidth={10}
+                    buttonHeight={12}
+                    className={`tag w-full h-12 bg-blue-500  flex items-center justify-center`}
+                // This way, the Mybutton component can receive additional classes through the className prop and apply them dynamically.
+
+                >
+                    <h3 className='text-sm font-semibold'>Submit</h3>
+                </Mybutton>
+            </form>
+>>>>>>> origin/main
         </div>
     )
 };
