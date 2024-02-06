@@ -1,15 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import Mybutton from './button';
+import { useNavigate } from 'react-router-dom';
+import Mybutton from './button.jsx';
 
 const Login = () => {
 
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        email: '',
+        userName: '',
+        password: ''
+    });
+
+    const handleChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        });
+    }
+
+
+    const handleSignUpClick = () => {
+        // Use the navigate function to redirect to the signup page
+        navigate('/user/register');
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:3001", email);
+            const formData = { userName, email, password };
+            const res = await axios.post("http://localhost:3001/user/login", formData);
             alert("User Loging in ");
+            window.localStorage.setItem("userID", res.data.userID);
+            window.localStorage.setItem("access_token", res.data.token);
+            navigate('/todo/createTodo');
         } catch (error) {
             console.error("Error in Login:", error);
             alert("Failed to login. Please try again.");
@@ -80,26 +105,24 @@ const Login = () => {
                         <div>
                             <Mybutton
                                 buttonText="Submit"
-                                onClickHandler={handleSubmit}
+                                onClickHandler={() => console.log("Login Submit Button clicked!")}
                                 buttonWidth={10}
                                 buttonHeight={12}
                                 className={`tag w-full h-12 bg-blue-500  flex items-center justify-center`}
                             // This way, the Mybutton component can receive additional classes through the className prop and apply them dynamically.
 
-                            >
-                                <h3 className='text-sm font-semibold'>Submit</h3>
-                            </Mybutton>
+                            />
                         </div>
                     </form>
 
                     <p className="mt-10 text-center text-sm text-gray-500">
                         Not a registered User?{' '}
-                        <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                            Click here
-                        </a>
+                        <button onClick={handleLoginClick}>
+                            Switch to {showLogin ? 'Sign Up' : 'Login'}
+                        </button>
                     </p>
                 </div>
-            </div>
+            </div >
         </>
     )
 };

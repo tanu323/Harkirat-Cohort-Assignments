@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Mybutton from './button.jsx';
-import TodoForm from './todoForm.jsx';
+import TodoForm from "./createTodo.jsx";
 
 const Header = () => {
     const [showTodoForm, setShowTodoForm] = useState(false);
@@ -9,8 +9,8 @@ const Header = () => {
         setShowTodoForm(true);
     }
     return (
-        <header class="bg-dark space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
-            <div class="flex items-center justify-between">
+        <header className="bg-dark space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
+            <div className="flex items-center justify-between">
                 <Mybutton
                     buttonText="New"
                     onClickHandler={createNewTodo}

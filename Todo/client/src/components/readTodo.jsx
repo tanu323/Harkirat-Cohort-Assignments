@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
-import Checkbox from './checkbox';
+import Checkbox from '../components/checkbox.jsx';
 
 const TodoCard = ({ todoTobeRendered }) => {
 
@@ -23,9 +23,6 @@ const TodoCard = ({ todoTobeRendered }) => {
                     <div>{eachTask}</div>
                 </>
             ))}
-            <div>
-
-            </div>
         </motion.div>
     )
 }
