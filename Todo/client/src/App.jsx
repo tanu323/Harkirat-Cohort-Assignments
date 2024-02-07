@@ -18,8 +18,8 @@ const App = () => {
             <>
               <Navbar />
               <Routes>
-                <Route path="/todo/readtodos" element={<ReadTodos />} />
-                <Route path="/todo/createTodo" element={<CreateTodo />} />
+                <Route key="ReadTodos" path="/todo/readTodos" element={<ReadTodos />} />
+                <Route key="CreateTodo" path="/todo/createTodo" element={<CreateTodo />} />
               </Routes>
             </>
           }
