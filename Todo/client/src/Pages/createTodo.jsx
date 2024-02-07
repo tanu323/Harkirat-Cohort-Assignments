@@ -4,7 +4,6 @@ import Header from "../components/header.jsx";
 const CreateTodo = () => {
     return (
         <div>
-            {/* <Navbar/> */}
             <Header />
         </div>
     );

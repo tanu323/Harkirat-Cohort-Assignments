@@ -1,10 +1,9 @@
 import React from 'react';
-import Foreground from "../components/Foreground.jsx"
+import TodoList from "../components/TodoList.jsx"
 const ReadTodos = () => {
     return (
         <div>
-            {/* <Navbar/> */}
-            <Foreground />
+            <TodoList />
         </div>
     )
 }

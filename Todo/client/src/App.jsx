@@ -19,8 +19,8 @@ const App = () => {
               <>
                 <Navbar />
                 <Routes>
-                  <Route path="/readTodos" element={<ReadTodos />} />
-                  <Route path="/createTodo" element={<CreateTodo />} />
+                  <Route path="/todo/readtodos" element={<ReadTodos />} />
+                  <Route path="/todo/createTodo" element={<CreateTodo />} />
                 </Routes>
               </>
             }

@@ -3,7 +3,7 @@ import { TodoModal } from "../Modals/todo.modal.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/readTodos", async (req, res) => {
     try {
         const todoResponse = await TodoModal.find({});
         if (todoResponse.length === 0) {
@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/createTodo", async (req, res) => {
     try {
         const todo = new TodoModal(req.body);
         const response = await todo.save();
