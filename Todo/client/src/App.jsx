@@ -9,24 +9,22 @@ import CreateTodo from './Pages/createTodo.jsx';
 const App = () => {
   return (
     <div className='relative w-screen h-screen bg-zinc-800 text-white'>
-      <Router>
-        <Background />
-        <Routes>
-          <Route path="/user" element={<User />} />
-          <Route
-            path="/*"
-            element={
-              <>
-                <Navbar />
-                <Routes>
-                  <Route path="/todo/readtodos" element={<ReadTodos />} />
-                  <Route path="/todo/createTodo" element={<CreateTodo />} />
-                </Routes>
-              </>
-            }
-          />
-        </Routes>
-      </Router>
+      <Background />
+      <Routes>
+        <Route path="/user" element={<User />} />
+        <Route
+          path="/*"
+          element={
+            <>
+              <Navbar />
+              <Routes>
+                <Route path="/todo/readtodos" element={<ReadTodos />} />
+                <Route path="/todo/createTodo" element={<CreateTodo />} />
+              </Routes>
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
 }
