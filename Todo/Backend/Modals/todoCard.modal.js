@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 
 // Define the Todo schema
-const todoSchema = new mongoose.Schema({
+const todoCardSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
     },
-    tasks: [{
-        type: String,
-        default: '',
-        required: true
-    }],
+    tasks: [
+        {
+            type: String,
+            required: true
+        }
+    ],
     completed: {
         type: Boolean,
         default: false,
@@ -27,4 +28,4 @@ const todoSchema = new mongoose.Schema({
 });
 
 // Create the Todo model
-export const TodoModal = mongoose.model('todo', todoSchema);
+export const TodoCardModal = mongoose.model('todoCard', todoCardSchema);

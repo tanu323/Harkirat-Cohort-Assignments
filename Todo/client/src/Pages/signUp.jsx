@@ -14,7 +14,8 @@ const SignUp = () => {
 
     const handleLoginClick = () => {
         // Use the navigate function to redirect to the Login page
-        navigate('/user/Login');
+        console.log("clicked to go to login");
+        navigate("/Login")
     }
 
     const handleChange = (event) => {
@@ -22,15 +23,28 @@ const SignUp = () => {
             ...formData,
             [event.target.name]: event.target.value
         });
+        console.log(formData);
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const { userName, email, password } = formData;
-            await axios.post("http://localhost:3001/user/register", formData);
-            alert("User Signing in ");
-            navigate('/createTodo');
+            // const formData = { userName, email, password };
+            await axios.post("http://localhost:8001/user/register", formData).
+                then((res) => {
+                    if (res.status === 201) {
+                        alert(res.data.message)
+                        navigate("/Login")
+                    }
+                    else {
+                        navigate("/todo/createTodo")
+                    }
+
+                }).
+                catch((error) => {
+                    throw new Error(error);
+                });
+
         } catch (error) {
             console.error("Error in Login:", error);
             alert("Failed to login. Please try again.");
@@ -52,7 +66,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                                 Email address
@@ -107,7 +121,7 @@ const SignUp = () => {
                         <div>
                             <Mybutton
                                 buttonText="Submit"
-                                onClickHandler={() => (console.log("Register Submit button clicked"))}
+                                onClickHandler={handleSubmit}
                                 buttonWidth={10}
                                 buttonHeight={12}
                                 className={`tag w-full h-12 bg-blue-500  flex items-center justify-center`}
@@ -120,9 +134,7 @@ const SignUp = () => {
                     </form>
                     <p className="mt-10 text-center text-sm text-gray-500">
                         Already have an account?{' '}
-                        <button onClick={handleLoginClick}>
-                            Switch to {showLogin ? 'Sign Up' : 'Login'}
-                        </button>
+                        <Mybutton buttonText="Login Here" onClickHandler={handleLoginClick} buttonWidth={10} buttonHeight={20} />
                     </p>
                 </div>
             </div>

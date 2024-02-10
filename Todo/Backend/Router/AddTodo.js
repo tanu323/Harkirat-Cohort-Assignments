@@ -1,11 +1,13 @@
 import express from "express";
-import { TodoModal } from "../Modals/todo.modal.js";
+import { TodoCardModal } from "../Modals/todoCard.modal.js";
+import { savedTodoModal } from "../Modals/savedTodos.modal.js";
 
 const router = express.Router();
 
 router.get("/readTodos", async (req, res) => {
     try {
-        const todoResponse = await TodoModal.find({});
+        const todoResponse = await savedTodoModal.find({});
+        console.log
         if (todoResponse.length === 0) {
             return res.status(404).json({ message: "No todos found." });
         }
@@ -20,14 +22,14 @@ router.get("/readTodos", async (req, res) => {
 
 router.post("/createTodo", async (req, res) => {
     try {
-        const todo = new TodoModal(req.body);
+        const todo = new TodoCardModal(req.body);
         const response = await todo.save();
         // Log the saved Todo to the console (optional)
         console.log(response);
         res.status(201).json(response);
     } catch (error) {
         console.error("Error creating todo:", error.message);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ message: error.message });
     }
 })
 

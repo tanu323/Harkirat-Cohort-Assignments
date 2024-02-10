@@ -21,12 +21,21 @@ const TodoForm = ({ setShowTodoForm }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:3001/todo/createTodo", todoForm);
-            alert("Todo created");
+            console.log("Todo From: ", todoForm);
+            await axios.post("http://localhost:8001/todo/createTodo", todoForm).
+                then((res) => {
+                    console.log("Response of createtodo", res)
+                    alert("Todo created");
+                }).
+                catch((error) => {
+                    console.log(error);
+                    throw new Error(error.response.data.message)
+                });
+
             setShowTodoForm(false);
         } catch (error) {
             console.error("Error creating Todo:", error);
-            alert("Failed to create Todo. Please try again.");
+            alert(error);
         }
     };
 
@@ -70,7 +79,7 @@ const TodoForm = ({ setShowTodoForm }) => {
                         {/* Button to submit the todo */}
                         <Mybutton
                             buttonText="Submit"
-                            onClickHandler={() => console.log("CreateTodo Submit Button clicked!")}
+                            onClickHandler={handleSubmit}
                             buttonWidth={10}
                             buttonHeight={12}
                             className={`tag w-full h-16 bg-blue-500  flex items-center justify-center`}

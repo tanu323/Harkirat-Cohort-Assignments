@@ -16,7 +16,6 @@ const port = 3000;
 app.use("/todo", todoRouter);
 app.use("/user", userRouter);
 
-
 // Start the server
 (async () => {
     try {

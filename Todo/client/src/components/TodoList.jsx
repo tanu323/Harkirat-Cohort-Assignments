@@ -10,7 +10,8 @@ const TodoList = () => {
     useEffect(() => {
         const fetchSavedTodos = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/todo/readTodos`);
+                const response = await axios.get(`http://localhost:8001/todo/readTodos`);
+
                 console.log("saved Todo: ", response.data.savedTodos);
                 if (response.data && response.data.savedTodos) {
                     setSavedTodos(response.data.savedTodos);
@@ -25,7 +26,6 @@ const TodoList = () => {
 
     return (
         <section>
-            <Navbar />
             <Header />
             {savedTodos.map((eachTodo, index) => (
                 <div key={index}>
