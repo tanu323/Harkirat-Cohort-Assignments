@@ -7,33 +7,38 @@ const router = express.Router();
 router.get("/readTodos/:userID", async (req, res) => {
     try {
         const user = await UserModal.findById(req.params.userID);
-        if (user.savedTodos.length === 0) {
+        var savedTodoCards = [];
+
+        if (!user || !user.savedTodos || user.savedTodos.length === 0) {
             return res.status(404).json({ message: "No todos found." });
         }
-        else {
-            var savedTodoCards = [];
 
+        await Promise.all(
             user.savedTodos.map(async (todoCardId) => {
                 try {
                     const foundTodoCard = await TodoCardModal.findById(todoCardId);
                     if (foundTodoCard) {
                         savedTodoCards.push(foundTodoCard);
-                        console.log("SavedTodoCards: ", savedTodoCards);
                     } else {
-                        console.log(`Todo card with ID ${todoCardId} not found.`);
+                        throw new Error(`Todo card not found with ID: ${todoCardId}`);
                     }
                 } catch (error) {
-                    console.error(`Error finding todo card with ID ${todoCardId}:`, error);
+                    throw new Error(
+                        `Error finding todo card with ID ${todoCardId}: ${error.message}`
+                    );
                 }
+            })
+        );
+
+        if (savedTodoCards.length === 0) {
+            return res.status(201).json({
+                message: "User has no todos",
+                userSavedTodos: savedTodoCards,
             });
-
-            return res.json({ message: "Todos retrieved successfully.", userSavedTodos: savedTodoCards });
-
         }
-
+        return res.json(savedTodoCards);
     } catch (error) {
-        console.error("Error fetching todos:", error.message);
-        res.status(500).json({ error: "Internal Server Error in fetching todos" });
+        res.status(500).json({ error: error.message });
     }
 });
 
@@ -53,4 +58,7 @@ router.post("/createTodo", async (req, res) => {
 
 
 export { router as todoRouter };
+
+
+
 
