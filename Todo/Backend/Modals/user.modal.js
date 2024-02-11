@@ -13,7 +13,13 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    savedTodos:
+        [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "todoCard"
+        }]
+
 }, { timestamps: true });
 
 export const UserModal = mongoose.model("user", UserSchema);

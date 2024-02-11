@@ -6,13 +6,13 @@ import TodoCard from './todoCard.jsx'
 
 const TodoList = () => {
     const [savedTodos, setSavedTodos] = useState([]);
-
+    const userID = window.localStorage.getItem('userID')
     useEffect(() => {
         const fetchSavedTodos = async () => {
             try {
-                const response = await axios.get(`http://localhost:8001/todo/readTodos`);
+                const response = await axios.get(`http://localhost:8001/todo/readTodos/${userID}`);
 
-                console.log("saved Todo: ", response.data.savedTodos);
+                console.log("saved Todos: ", response);
                 if (response.data && response.data.savedTodos) {
                     setSavedTodos(response.data.savedTodos);
                 }
