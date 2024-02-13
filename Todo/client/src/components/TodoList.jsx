@@ -10,6 +10,7 @@ const TodoList = () => {
     useEffect(() => {
         const fetchSavedTodos = async () => {
             try {
+                console.log(userID);
                 const response = await axios.get(`http://localhost:8001/todo/readTodos/${userID}`);
 
                 console.log("saved Todos: ", response);
@@ -23,20 +24,19 @@ const TodoList = () => {
     }, []);
 
     return (
-        // <section>
-        //     <Header />
-        //     {savedTodos.map((eachTodo, index) => (
-        //         <div key={index}>
-        //             <div className='footer absolute inset-x-0 bottom-0 h-20'>
-        //                 {eachTodo.title}
-        //             </div>
-        //             <TodoCard tasksTobeRendered={eachTodo.tasks} />
-        //         </div>
-        //     ))}
-
-        // </section>
         <>
+            <section>
+                <Header />
+                {savedTodos.map((eachTodo, index) => (
+                    <div key={index}>
+                        <div className='footer absolute inset-x-0 bottom-0 h-20'>
+                            {eachTodo.title}
+                        </div>
+                        <TodoCard tasksTobeRendered={eachTodo.tasks} />
+                    </div>
+                ))}
 
+            </section>
         </>
     )
 }
